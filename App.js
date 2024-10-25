@@ -71,7 +71,7 @@ const App = () => {
             headerShown: true,
             title: "Stop Details",
             headerStyle: {
-              backgroundColor: '#4169E1',
+              backgroundColor: '#eb5a0b',
             },
             headerTintColor: '#fff',
           }}

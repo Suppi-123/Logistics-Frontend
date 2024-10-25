@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   truckInfo: {
     padding: 16,
-    backgroundColor: '#4169E1',
+    backgroundColor: '#d4480c', // Updated background color for truck info
     color: '#fff',
   },
   truckName: {
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 8,
-    color: '#4169E1',
+    color: '#d4480c', // Updated icon color
   },
   locationText: {
     fontWeight: 'bold',

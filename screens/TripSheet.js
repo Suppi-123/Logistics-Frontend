@@ -1,142 +1,129 @@
-// screens/TripSheetScreen.js
 import React from 'react';
-import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
-export default function TripSheetScreen() {
+// Dummy Data for Deliveries
+const deliveries = [
+  { id: 1, address: '456 Pine Rd, Jane Smith', status: 'Completed', confirmDelivery: true },
+  { id: 2, address: '789 Oak Ave, Bob Johnson', status: 'Pending', confirmDelivery: false },
+  { id: 3, address: '321 Maple Dr, Alice Brown', status: 'Completed', confirmDelivery: true },
+  { id: 4, address: '654 Cedar Ln, Tom White', status: 'Pending', confirmDelivery: false }
+];
+
+const TripSheet = () => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Trip Sheet</Text>
-        <Text style={styles.headerIcon}>📋</Text>
+        <Text style={styles.headerTitle}>Trip Sheet</Text>
       </View>
 
-      <Text style={styles.sectionTitle}>Deliveries List</Text>
-      
-      <ScrollView style={styles.scrollView}>
-        <DeliveryItem 
-          address="456 Pine Rd, Jane Smith"
-          status="Completed"
-          confirmed={true}
-        />
-        <DeliveryItem 
-          address="789 Oak Ave, Bob Johnson"
-          status="Pending"
-          confirmed={false}
-        />
-        <DeliveryItem 
-          address="321 Maple Dr, Alice Brown"
-          status="Completed"
-          confirmed={true}
-        />
-        <DeliveryItem 
-          address="654 Cedar Ln, Tom White"
-          status="Pending"
-          confirmed={false}
-        />
-      </ScrollView>
-
-      {/* <View style={styles.fuelSection}>
-        <Text style={styles.sectionTitle}>Fuel Usage Input</Text>
-        <TextInput 
-          style={styles.input}
-          placeholder="Current Fuel (L)"
-        />
-        <TextInput 
-          style={styles.input}
-          placeholder="Fuel Used (L)"
-        />
-        <TouchableOpacity style={styles.submitButton}>
-          <Text style={styles.submitButtonText}>Submit</Text>
-        </TouchableOpacity>
-      </View> */}
-    </View>
+      <View style={styles.content}>
+        <Text style={styles.subtitle}>Deliveries List</Text>
+        
+        {deliveries.map((delivery) => (
+          <View
+            key={delivery.id}
+            style={[
+              styles.deliveryCard,
+              delivery.status === 'Completed' ? styles.completedCard : styles.pendingCard
+            ]}
+          >
+            <Text style={styles.deliveryAddress}>{delivery.address}</Text>
+            
+            <Text style={delivery.status === 'Completed' ? styles.statusCompleted : styles.statusPending}>
+              {delivery.status}
+            </Text>
+            
+            <TouchableOpacity style={styles.confirmationContainer}>
+              <Text style={styles.confirmText}>Confirm delivery:</Text>
+              <View style={styles.checkbox}>
+                <Text>{delivery.confirmDelivery ? '[x]' : '[ ]'}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
-}
-
-const DeliveryItem = ({ address, status, confirmed }) => (
-  <View style={styles.deliveryItem}>
-    <Text style={styles.addressText}>{address}</Text>
-    <Text style={[styles.statusText, status === 'Completed' ? styles.completedStatus : styles.pendingStatus]}>
-      {status}
-    </Text>
-    <Text style={styles.confirmText}>
-      Confirm delivery: {confirmed ? '[x]' : '[ ]'}
-    </Text>
-  </View>
-);
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '##fff7ed', // Light orange background
+    padding: 20,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-    paddingTop: 48,
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#FFB74D', // Light orange border
+    marginBottom: 20,
   },
-  headerText: {
-    fontSize: 24,
+  headerTitle: {
+    fontSize: 28,
     fontWeight: 'bold',
+    color: '#D84315', // Darker orange for header
   },
-  headerIcon: {
-    fontSize: 24,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    padding: 16,
-    paddingBottom: 8,
-  },
-  scrollView: {
+  content: {
     flex: 1,
   },
-  deliveryItem: {
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: '#e0e0e0',
-    borderRadius: 8,
-    margin: 8,
-    padding: 12,
+  subtitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    marginBottom: 15,
+    color: '##431507', // Darker subtitle color
   },
-  addressText: {
+  deliveryCard: {
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
+  },
+  completedCard: {
+    backgroundColor: '#FFCC80',  // Light orange for completed
+  },
+  pendingCard: {
+    backgroundColor: '#FFAB40',  // Darker orange for pending
+  },
+  deliveryAddress: {
     fontSize: 16,
-    marginBottom: 4,
+    fontWeight: '500',
+    color: '#3E2723', // Darker color for address
+    marginBottom: 10,
   },
-  statusText: {
+  statusCompleted: {
     fontSize: 14,
-    marginBottom: 4,
+    fontWeight: 'bold',
+    color: '#388E3C',  // Dark green for completed
+    marginBottom: 10,
   },
-  completedStatus: {
-    color: 'green',
+  statusPending: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '###9b3511',  // Dark orange for pending
+    marginBottom: 10,
   },
-  pendingStatus: {
-    color: 'orange',
+  confirmationContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   confirmText: {
     fontSize: 14,
-    color: '#666',
+    marginRight: 10,
+    color: '##7d2e11', // Darker orange for confirm text
   },
-  fuelSection: {
-    padding: 16,
-  },
-  input: {
+  checkbox: {
+    width: 30,
+    height: 30,
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 12,
-  },
-  submitButton: {
-    backgroundColor: '#007AFF',
-    borderRadius: 8,
-    padding: 12,
-  },
-  submitButtonText: {
-    color: 'white',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
+    borderColor: '#FFB74D', // Light orange for the checkbox border
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF', // White background for the checkbox
+  }
 });
+
+export default TripSheet;

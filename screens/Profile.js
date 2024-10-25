@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   heading: {
     marginBottom: 20,
     fontWeight: 'bold',
+    color: '#d4480c', // Updated color
   },
   input: {
     marginBottom: 15,
@@ -86,5 +87,6 @@ const styles = StyleSheet.create({
   button: {
     margin: 20,
     borderRadius: 10,
+    backgroundColor: '#d4480c', // Updated button color
   },
 });

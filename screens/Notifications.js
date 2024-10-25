@@ -26,49 +26,57 @@ export default function NotificationScreen() {
         <NotificationItem 
           title="Route Change"
           message="Route 12 delayed by 15 mins."
-          time="Received at 10:45 AM"
+          time="10:45 AM"
           type="route"
+          read={false} // Updated to indicate unread
         />
         <NotificationItem 
           title="New Task"
           message="Complete project report by EOD."
-          time="Received at 9:30 AM"
+          time="9:30 AM"
           type="task"
+          read={true} // Updated to indicate read
         />
         <NotificationItem 
           title="Route Alert"
           message="Accident on Route 5, expect delays."
-          time="Received at 8:20 AM"
+          time="8:20 AM"
           type="route"
+          read={false} // Updated to indicate unread
         />
         <NotificationItem 
           title="Task Update"
           message="Client feedback received, revise slides."
-          time="Received at 7:50 AM"
+          time="7:50 AM"
           type="task"
+          read={true} // Updated to indicate read
         />
         <NotificationItem 
           title="Route Change"
           message="Route 23 rerouted due to construction."
-          time="Received at 6:15 AM"
+          time="6:15 AM"
           type="route"
+          read={false} // Updated to indicate unread
         />
         <NotificationItem 
           title="Task Reminder"
           message="Team meeting at 11 AM."
-          time="Received at 5:00 AM"
+          time="5:00 AM"
           type="task"
+          read={true} // Updated to indicate read
         />
       </ScrollView>
     </View>
   );
 }
 
-const NotificationItem = ({ title, message, time, type }) => (
-  <View style={styles.notificationItem}>
+const NotificationItem = ({ title, message, time, type, read }) => (
+  <View style={[styles.notificationItem, { backgroundColor: read ? '#febb73' : '#FFF' }]}>
     <View style={styles.notificationContent}>
-      <Text style={styles.notificationTitle}>{title}</Text>
-      <Text style={styles.notificationMessage}>{message}</Text>
+      <View style={styles.notificationText}>
+        <Text style={styles.notificationTitle}>{title}</Text>
+        <Text style={styles.notificationMessage}>{message}</Text>
+      </View>
       <Text style={styles.notificationTime}>{time}</Text>
     </View>
   </View>
@@ -89,6 +97,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#FFA07A', // Updated color
   },
   searchContainer: {
     flexDirection: 'row',
@@ -109,18 +118,34 @@ const styles = StyleSheet.create({
   notificationItem: {
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    borderBottomColor: '#00008B',
+    borderRadius: 10, // Added for card effect
+    elevation: 3, // Added for shadow effect on Android
+    shadowColor: '#000', // Added for shadow effect on iOS
+    shadowOffset: { width: 0, height: -3 }, // Added for shadow effect on iOS
+    shadowOpacity: 0.2, // Added for shadow effect on iOS
+    shadowRadius: 4, // Added for shadow effect on iOS
+    marginVertical: 8, // Added for spacing between cards
+    marginLeft: 9,
+    marginRight: 9,
   },
   notificationContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     gap: 4,
+  },
+  notificationText: {
+    flex: 1,
   },
   notificationTitle: {
     fontSize: 16,
     fontWeight: '600',
+    color: '##fed8aa', // Updated color
   },
-  notificationMessage: {
+notificationMessage: {
     fontSize: 14,
-    color: '#444',
+    color: '##fed8aa', // Updated color to match title
   },
   notificationTime: {
     fontSize: 12,

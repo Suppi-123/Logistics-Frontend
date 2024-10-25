@@ -44,7 +44,11 @@ const Details = ({ route }) => {
           placeholder="Enter OTP"
           keyboardType="numeric"
         />
-        <Button title="Submit OTP" onPress={() => console.log('OTP submitted:', otp)} />
+        <Button 
+          title="Submit OTP" 
+          onPress={() => console.log('OTP submitted:', otp)} 
+          color="#d4480c" // Updated color to orange
+        />
       </View>
     </View>
   );
@@ -59,6 +63,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: '#d4480c', // Updated color
   },
   card: {
     backgroundColor: 'white',
@@ -75,6 +80,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#d4480c', // Updated color
   },
   mapContainer: {
     height: 200,
@@ -115,7 +121,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
   },
   markerLabel: {
-    color: '#4169E1',
+    color: '#d4480c', // Updated color for marker label
     fontSize: 12,
     fontWeight: 'bold',
     marginTop: 4,
@@ -124,6 +130,8 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     borderRadius: 4,
   },
+
+
   customerPhotoPlaceholder: {
     height: 150,
     backgroundColor: '#f0f2f5',
